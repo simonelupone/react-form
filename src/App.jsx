@@ -71,6 +71,10 @@ function App() {
         setNewArticle('');
     }
 
+    const handleDelete = (id) => {
+        setArticles(articles.filter(article => article.id !== id));
+    }
+
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <h1 className='my-6 text-3xl font-semibold'>Articles</h1>
@@ -78,8 +82,16 @@ function App() {
             <ul className='flex flex-col gap-4'>
                 {articles.map(article => (
 
-                    <li key={`article-${article.id}`} className='flex flex-col justify-between items-center'>
+                    <li key={`article-${article.id}`} className='flex justify-between items-center gap-8'>
+
                         <span className='font-mono underline'>{article.title}</span>
+
+                        <button
+                            onClick={() => handleDelete(article.id)}
+                            className='bg-red-500 hover:bg-red-600 text-white px-2 rounded'
+                        >
+                            Delete
+                        </button>
                     </li>
 
                 ))}
@@ -87,7 +99,7 @@ function App() {
 
             <form
                 onSubmit={handleAdd}
-                className='mt-20 flex gap-4'
+                className='mt-20 flex sm:flex-row flex-col gap-4'
             >
                 <input
                     onChange={e => setNewArticle(e.target.value)}
