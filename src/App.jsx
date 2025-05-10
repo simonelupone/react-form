@@ -64,6 +64,10 @@ function App() {
 
         const article = newArticle.trim();
 
+        if (!article) return alert(
+            'Please, insert a valid article title'
+        );
+
         setArticles([...articles, {
             id: nanoid(),
             title: article,
