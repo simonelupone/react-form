@@ -1,4 +1,6 @@
-const articles = [
+import {useState} from "react";
+
+const initialArticles = [
     {
         id: 1,
         title: "Understanding React",
@@ -52,12 +54,19 @@ const articles = [
 ];
 
 function App() {
+
+    const handleAdd = (e) => {
+        e.preventDefault()
+    }
+
+    const [newArticle, setNewArticle] = useState('')
+
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <h1 className='my-6 text-3xl font-semibold'>Articles</h1>
 
             <ul className='flex flex-col gap-4'>
-                {articles.map(article => (
+                {initialArticles.map(article => (
 
                     <li key={`article-${article.id}`} className='flex flex-col justify-between items-center'>
                         <span className='font-mono underline'>{article.title}</span>
@@ -65,6 +74,25 @@ function App() {
 
                 ))}
             </ul>
+
+            <form
+                onSubmit={handleAdd}
+                className='mt-20 flex gap-4'
+            >
+                <input
+                    onChange={e => setNewArticle(e.target.value)}
+                    className='border-2 border-gray-300 rounded px-4 py-1'
+                    type='text'
+                    placeholder='Insert new article title'
+                    value={newArticle}
+                />
+
+                <button
+                    className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded'>
+                    Send
+                </button>
+
+            </form>
         </div>
     );
 }
