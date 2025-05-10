@@ -55,18 +55,28 @@ const initialArticles = [
 
 function App() {
 
-    const handleAdd = (e) => {
-        e.preventDefault()
-    }
+    const [newArticle, setNewArticle] = useState('');
+    const [articles, setArticles] = useState(initialArticles);
 
-    const [newArticle, setNewArticle] = useState('')
+    const handleAdd = (e) => {
+        e.preventDefault();
+
+        const article = newArticle.trim();
+
+        setArticles([...articles, {
+            id: article.length + 1,
+            title: newArticle,
+            author: 'Unknown'
+        }]);
+        setNewArticle('');
+    }
 
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <h1 className='my-6 text-3xl font-semibold'>Articles</h1>
 
             <ul className='flex flex-col gap-4'>
-                {initialArticles.map(article => (
+                {articles.map(article => (
 
                     <li key={`article-${article.id}`} className='flex flex-col justify-between items-center'>
                         <span className='font-mono underline'>{article.title}</span>
