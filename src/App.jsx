@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {nanoid} from "nanoid";
 
 const initialArticles = [
     {
@@ -64,8 +65,8 @@ function App() {
         const article = newArticle.trim();
 
         setArticles([...articles, {
-            id: article.length + 1,
-            title: newArticle,
+            id: nanoid(),
+            title: article,
             author: 'Unknown'
         }]);
         setNewArticle('');
