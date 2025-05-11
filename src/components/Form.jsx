@@ -1,22 +1,31 @@
 import {nanoid} from "nanoid";
 
-const Form = ({newArticle, setNewArticle, articles, setArticles}) => {
+const Form = ({formData, setFormData, articles, setArticles}) => {
 
     const handleAdd = (e) => {
         e.preventDefault();
 
-        const article = newArticle.trim();
+        const title = formData.title.trim();
+        const author = formData.author.trim();
 
-        if (!article) return alert(
-            'Please, insert a valid article title'
+        if (!title || !author)
+            return alert(
+            'Please, insert valid title and author'
         );
 
         setArticles([...articles, {
             id: nanoid(),
-            title: article,
-            author: 'Unknown'
+            title,
+            author
         }]);
-        setNewArticle('');
+        setFormData({title: "", author: ""});
+    }
+
+    const handleEdit = (e) => {
+        const {name, value} = e.target;
+        // copy current value of formData -> ...prev
+        // [name]: value overwrites the corresponding propriety
+        setFormData(prev => ({...prev, [name]: value}));
     }
 
     return (
@@ -25,11 +34,21 @@ const Form = ({newArticle, setNewArticle, articles, setArticles}) => {
             className='mt-20 flex sm:flex-row flex-col gap-4'
         >
             <input
-                onChange={e => setNewArticle(e.target.value)}
+                name="title"
+                onChange={handleEdit}
                 className='border-2 border-gray-300 rounded px-4 py-1'
                 type='text'
                 placeholder='Insert new article title'
-                value={newArticle}
+                value={formData.title}
+            />
+
+            <input
+                name="author"
+                onChange={handleEdit}
+                className='border-2 border-gray-300 rounded px-4 py-1'
+                type='text'
+                placeholder='Insert new article author'
+                value={formData.author}
             />
 
             <button
