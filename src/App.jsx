@@ -61,7 +61,7 @@ function App() {
     // const [newArticle, setNewArticle] = useState('');
     const [formData, setFormData] = useState({title: "", author: ""})
     const [articles, setArticles] = useState(initialArticles);
-
+    console.log(articles);
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <Header/>

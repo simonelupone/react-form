@@ -21,7 +21,7 @@ const Form = ({formData, setFormData, articles, setArticles}) => {
         setFormData({title: "", author: ""});
     }
 
-    const handleEdit = (e) => {
+    const handleChange = (e) => {
         const {name, value} = e.target;
         // copy current value of formData -> ...prev
         // [name]: value overwrites the corresponding propriety
@@ -35,7 +35,7 @@ const Form = ({formData, setFormData, articles, setArticles}) => {
         >
             <input
                 name="title"
-                onChange={handleEdit}
+                onChange={handleChange}
                 className='border-2 border-gray-300 rounded px-4 py-1'
                 type='text'
                 placeholder='Insert new article title'
@@ -44,7 +44,7 @@ const Form = ({formData, setFormData, articles, setArticles}) => {
 
             <input
                 name="author"
-                onChange={handleEdit}
+                onChange={handleChange}
                 className='border-2 border-gray-300 rounded px-4 py-1'
                 type='text'
                 placeholder='Insert new article author'

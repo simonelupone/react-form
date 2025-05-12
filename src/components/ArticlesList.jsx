@@ -10,7 +10,10 @@ const ArticlesList = ({articles, setArticles}) => {
 
                 <li key={`article-${article.id}`} className='flex justify-between items-center gap-8'>
 
-                    <span className='font-mono underline'>{article.title}</span>
+                    <div>
+                        <div className='font-mono underline'>{article.title}</div>
+                        <div className='font-mono text-sm text-gray-500'><em>{article.author}</em></div>
+                    </div>
 
                     <button
                         onClick={() => handleDelete(article.id)}
